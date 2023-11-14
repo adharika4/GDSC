@@ -1,0 +1,61 @@
+//STRINGS
+//QUESTION 1 : reverse a string
+public class ReverseString {
+    public static void main(String[] args) {
+        String original = "Hello, World!";
+        
+        // Create a StringBuilder object and append the original string
+        StringBuilder reversed = new StringBuilder(original);
+        
+        // Use the reverse() method of StringBuilder
+        reversed = reversed.reverse();
+        
+        // Convert StringBuilder back to String
+        String result = reversed.toString();
+        
+        System.out.println("Original: " + original);
+        System.out.println("Reversed: " + result);
+    }
+}
+//question 2 : to lower case
+public class LowercaseExample {
+    public static void main(String[] args) {
+        String original = "Hello, World!";
+        
+        // Convert the string to lowercase
+        String lowercase = original.toLowerCase();
+        
+        System.out.println("Original: " + original);
+        System.out.println("Lowercase: " + lowercase);
+    }
+}
+//question 3 : valid palindrome
+public class PalindromeCheck {
+    public static void main(String[] args) {
+        String str = "A den, a fish, a smile, banama";
+        
+        // Remove non-alphanumeric characters and convert to lowercase
+        String cleanStr = str.replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
+        
+        // Check if the cleaned string is a palindrome
+        boolean isPalindrome = isPalindrome(cleanStr);
+        
+        System.out.println("Original String: " + str);
+        System.out.println("Is Palindrome: " + isPalindrome);
+    }
+
+    // Function to check if a string is a palindrome
+    private static boolean isPalindrome(String str) {
+        int left = 0;
+        int right = str.length() - 1;
+
+        while (left < right) {
+            if (str.charAt(left) != str.charAt(right)) {
+                return false;
+            }
+            left++;
+            right--;
+        }
+        return true;
+    }
+}
