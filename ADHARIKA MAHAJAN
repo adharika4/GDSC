@@ -1,0 +1,185 @@
+#ARRAYS
+# QUESTION 1: Concatenation of 2 arrays
+public class ArrayConcatenation {
+    public static void main(String[] args) {
+        int[] array1 = {1, 2, 3};
+        int[] array2 = {4, 5, 6};
+
+        int[] result = new int[array1.length + array2.length];
+
+        System.arraycopy(array1, 0, result, 0, array1.length);
+        System.arraycopy(array2, 0, result, array1.length, array2.length);
+
+        // Print the concatenated array
+        for (int num : result) {
+            System.out.print(num + " ");
+        }
+    }
+}
+# QUESTION 2 : 3Sum
+import java.util.*;
+
+public class ThreeSum {
+
+    public static List<List<Integer>> threeSum(int[] nums, int target) {
+        List<List<Integer>> result = new ArrayList<>();
+
+        if (nums == null || nums.length < 3) {
+            return result;
+        }
+
+        Arrays.sort(nums);
+
+        for (int i = 0; i < nums.length - 2; i++) {
+            if (i > 0 && nums[i] == nums[i - 1]) {
+                continue; // Skip duplicates
+            }
+
+            int left = i + 1;
+            int right = nums.length - 1;
+
+            while (left < right) {
+                int sum = nums[i] + nums[left] + nums[right];
+
+                if (sum == target) {
+                    result.add(Arrays.asList(nums[i], nums[left], nums[right]));
+
+                    // Skip duplicates
+                    while (left < right && nums[left] == nums[left + 1]) {
+                        left++;
+                    }
+
+                    while (left < right && nums[right] == nums[right - 1]) {
+                        right--;
+                    }
+
+                    left++;
+                    right--;
+                } else if (sum < target) {
+                    left++;
+                } else {
+                    right--;
+                }
+            }
+        }
+
+        return result;
+    }
+
+    public static void main(String[] args) {
+        int[] nums = {-1, 0, 1, 2, -1, -4};
+        int target = 0;
+
+        List<List<Integer>> result = threeSum(nums, target);
+
+        for (List<Integer> triplet : result) {
+            System.out.println(triplet);
+        }
+    }
+}
+
+QUESTION 3: remove an element in array
+import java.util.Arrays;
+
+public class RemoveElementFromArray {
+
+    public static int[] removeElement(int[] array, int elementToRemove) {
+        // Count occurrences of the element to be removed
+        int count = 0;
+        for (int i = 0; i < array.length; i++) {
+            if (array[i] == elementToRemove) {
+                count++;
+            }
+        }
+
+        // If the element is not present in the array, return the original array
+        if (count == 0) {
+            return array;
+        }
+
+        // Create a new array with size reduced by the count of the element to be removed
+        int[] result = new int[array.length - count];
+
+        // Copy elements from the original array to the new array, excluding the element to be removed
+        int index = 0;
+        for (int i = 0; i < array.length; i++) {
+            if (array[i] != elementToRemove) {
+                result[index++] = array[i];
+            }
+        }
+
+        return result;
+    }
+
+    public static void main(String[] args) {
+        int[] originalArray = {1, 2, 3, 4, 2, 5, 6};
+        int elementToRemove = 2;
+
+        int[] newArray = removeElement(originalArray, elementToRemove);
+
+        System.out.println("Original Array: " + Arrays.toString(originalArray));
+        System.out.println("Element to Remove: " + elementToRemove);
+        System.out.println("New Array: " + Arrays.toString(newArray));
+    }
+}
+QUESTION 4: find max and min elemnet in array :
+public class MaxMinArray {
+
+    public static void findMaxMin(int[] array) {
+        // Check if the array is not empty
+        if (array == null || array.length == 0) {
+            System.out.println("Array is empty.");
+            return;
+        }
+
+        int max = array[0]; // Initialize max with the first element
+        int min = array[0]; // Initialize min with the first element
+
+        // Iterate through the array to find max and min
+        for (int i = 1; i < array.length; i++) {
+            if (array[i] > max) {
+                max = array[i];
+            }
+            if (array[i] < min) {
+                min = array[i];
+            }
+        }
+
+        System.out.println("Maximum element: " + max);
+        System.out.println("Minimum element: " + min);
+    }
+
+    public static void main(String[] args) {
+        int[] numbers = {5, 2, 9, 1, 7, 3, 8, 4, 6};
+
+        findMaxMin(numbers);
+    }
+}
+QUESTION 5: no.of employes who met the target
+public class EmployeeTarget {
+
+    public static int countEmployeesMeetingTarget(int[] performance, int target) {
+        if (performance == null || performance.length == 0) {
+            return 0;
+        }
+
+        int count = 0;
+
+        for (int value : performance) {
+            if (value >= target) {
+                count++;
+            }
+        }
+
+        return count;
+    }
+
+    public static void main(String[] args) {
+        int[] employeePerformance = {80, 90, 75, 100, 85};
+        int targetPerformance = 80;
+
+        int count = countEmployeesMeetingTarget(employeePerformance, targetPerformance);
+
+        System.out.println("Number of employees meeting the target: " + count);
+    }
+}
